@@ -9,7 +9,6 @@ function max(array) {
 
 function sparkline(obj) {
     var c = obj;
-    console.log(c);
     var ctx = c.getContext("2d");
     var data = c.getAttribute("data-sparkline");
     var spark = data.split(',');
@@ -18,8 +17,7 @@ function sparkline(obj) {
     }
     var ratioW = c.width / spark.length;
     var ratioH = c.height / max(spark);
-    console.log(ratioW + ', ' + ratioH);
-
+    
     ctx.beginPath();
     ctx.lineWidth = "1";
     ctx.strokeStyle = "green";  // Green path

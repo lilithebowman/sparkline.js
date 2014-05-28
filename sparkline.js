@@ -1,6 +1,6 @@
-// sparkline.js - draws a canvas sparkline
+;// sparkline.js - draws a canvas sparkline
 
-/* Usage: <canvas class="sparkline" onclick="sparkline(this);" data-sparkline="1,2,7,5,2,9,10,3,7,8">Your browser does not support the HTML5 canvas tag.</canvas> */
+/* Usage: <canvas class="sparkline" data-sparkline="1,2,7,5,2,9,10,3,7,8">Your browser does not support the HTML5 canvas tag.</canvas> */
 /* Where data-sparkline is a list of values representing the data to be displayed. */
 
 function max(array) {
@@ -16,7 +16,6 @@ function sparkline(obj) {
     for (a in spark) {
         spark[a] = parseInt(spark[a], 10);
     }
-    console.log(max(spark));
     var ratioW = c.width / spark.length;
     var ratioH = c.height / max(spark);
     console.log(ratioW + ', ' + ratioH);
@@ -33,4 +32,9 @@ function sparkline(obj) {
         }
     }
     ctx.stroke();  // Draw it
+};
+
+var _sparklines_ = document.querySelectorAll('.sparkline');
+for (i = 0; i < _sparklines_.length; i++) {
+    sparkline(_sparklines_[i]);
 };

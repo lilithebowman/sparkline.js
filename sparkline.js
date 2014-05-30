@@ -26,7 +26,7 @@ function sparkline(obj) {
 	ctx.fillStyle = "#007AC9"; // Fill colour
 	ctx.lineWidth = "6";
 	ctx.strokeStyle = "#007AC9";  // Stroke colour
-	ctx.arc(margin, spark[0] * ratioH + margin, 8, 0, 2 * Math.PI);
+	ctx.arc(margin, c.height - ( spark[0] * ratioH + margin ), 8, 0, 2 * Math.PI);
 	ctx.fill();
 	ctx.stroke();
 	for (index in spark) {
@@ -35,7 +35,7 @@ function sparkline(obj) {
 			// First time
 			ctx.beginPath();
 			ctx.lineWidth = "6";
-			ctx.moveTo(10, spark[index] * ratioH + margin);
+			ctx.moveTo(10, c.height - ( spark[index] * ratioH + margin ) );
 		} else {
 			/* Set up the colour based on how far right in the graph we are */
 			if (index / spark.length > .5) {
@@ -48,10 +48,10 @@ function sparkline(obj) {
 				ctx.strokeStyle = "#00c972";  // Fifth stroke colour
 			}
 			x = index * ratioW + margin;
-			y = spark[index] * ratioH + margin;
+			y = c.height - ( spark[index] * ratioH + margin );
 			/* Draw the line */
 			ctx.beginPath();
-			ctx.moveTo((index - 1) * ratioW + margin, spark[index - 1] * ratioH + margin);
+			ctx.moveTo((index - 1) * ratioW + margin, c.height - ( spark[index - 1] * ratioH + margin) );
 			ctx.lineTo(x, y);
 			/* Draw a circle at the vertex to avoid a broken line */
 			if (index / spark.length > .5) {

@@ -21,58 +21,34 @@ function sparkline(obj) {
 	
 	var x = 0;
 	var y = 0;
-	var strokeColour = "#007AC9";  // Initial path colour
+	var grad = ctx.createLinearGradient(0, 0, c.width, c.height);
+	grad.addColorStop(0, "#007AC9");  // Initial path colour
+	grad.addColorStop(1, "#00c972");  // End stroke colour
+
+	ctx.strokeStyle = grad;
+	ctx.fillStyle = grad;
+	
 	ctx.beginPath();
-	ctx.fillStyle = "#007AC9"; // Fill colour
 	ctx.lineWidth = "6";
-	ctx.strokeStyle = "#007AC9";  // Stroke colour
 	ctx.arc(margin, c.height - ( spark[0] * ratioH + margin ), 8, 0, 2 * Math.PI);
 	ctx.fill();
 	ctx.stroke();
 	for (index in spark) {
-		ctx.fillStyle = "transparent";
 		if (index == 0) {
 			// First time
 			ctx.beginPath();
 			ctx.lineWidth = "6";
 			ctx.moveTo(10, c.height - ( spark[index] * ratioH + margin ) );
 		} else {
-			/* Set up the colour based on how far right in the graph we are */
-			if (index / spark.length > .5) {
-				ctx.strokeStyle = "#00a6c9";  // Second stroke colour
-			} else if (index / spark.length > .75) {
-				ctx.strokeStyle = "#00c9c7";  // Third stroke colour
-			} else if (index / spark.length > .85) {
-				ctx.strokeStyle = "#00c993";  // Fourth stroke colour
-			} else if (index / spark.length > .95) {
-				ctx.strokeStyle = "#00c972";  // Fifth stroke colour
-			}
 			x = index * ratioW + margin;
 			y = c.height - ( spark[index] * ratioH + margin );
-			/* Draw the line */
-			ctx.beginPath();
-			ctx.moveTo((index - 1) * ratioW + margin, c.height - ( spark[index - 1] * ratioH + margin) );
-			ctx.lineTo(x, y);
-			/* Draw a circle at the vertex to avoid a broken line */
-			if (index / spark.length > .5) {
-				ctx.fillStyle = "#00a6c9";  // Second fill colour
-			} else if (index / spark.length > .75) {
-				ctx.fillStyle = "#00c9c7";  // Third fill colour
-			} else if (index / spark.length > .85) {
-				ctx.fillStyle = "#00c993";  // Fourth fill colour
-			} else if (index / spark.length > .95) {
-				ctx.fillStyle = "#00c972";  // Fifth fill colour
-			}
-			ctx.arc(x, y, .5, 0, 2 * Math.PI);
-			ctx.stroke();
+			ctx.lineTo(x,y);
 		}
 	}
-
+	ctx.stroke();
 
 	ctx.beginPath();
-	ctx.fillStyle = "#00c972"; // Fill colour
 	ctx.lineWidth = "6";
-	ctx.strokeStyle = "#00c972";  // Stroke colour
 	ctx.arc(x, y, 8, 0, 2 * Math.PI);
 	ctx.fill();
 	ctx.stroke();

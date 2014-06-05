@@ -15,8 +15,8 @@ function sparkline(obj) {
 	for (a in spark) {
 		spark[a] = parseInt(spark[a], 10);
 	}
-	var ratioW = ( c.width * 1 ) / spark.length;
-	var ratioH = ( c.height * .8 ) / Math.max.apply(Math, spark);
+	var ratioW = ( ( c.width - margin*2 ) * 1 ) / spark.length;
+	var ratioH = ( ( c.height - margin*2 ) * .8 ) / Math.max.apply(Math, spark);
 	var margin = 10;
 	
 	var x = 0;
@@ -38,7 +38,7 @@ function sparkline(obj) {
 			// First time
 			ctx.beginPath();
 			ctx.lineWidth = "6";
-			ctx.moveTo(10, c.height - ( spark[index] * ratioH + margin ) );
+			ctx.moveTo(margin, c.height - ( spark[index] * ratioH + margin ) );
 		} else {
 			x = index * ratioW + margin;
 			y = c.height - ( spark[index] * ratioH + margin );

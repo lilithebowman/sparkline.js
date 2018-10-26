@@ -26,7 +26,6 @@ function sparkline(obj) {
 	var margin = 10;
 	var ratioW = ( ( c.width - margin*2 ) * 1 ) / spark.length;
 	var ratioH = ( ( c.height - margin*2 ) * .8 ) / scale;
-	console.log(ratioH);
 	
 	var x = 0;
 	var y = 0;

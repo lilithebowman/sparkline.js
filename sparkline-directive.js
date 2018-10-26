@@ -7,21 +7,21 @@ var sparkline = {
 			restrict: 'A',
 			scope: true,
 			link: function (scope, element, attrs, ngModel) {
-				//TODO: MAKE THIS DATA REAL!
-				var spark = [1, 2, 7, 5, 2, 9, 10, 3, 7, 8];
-
-				//TODO: DELETE THE FOLLOWING LINES TO REMOVE THE RANDOM GRAPH DATA
-				var i;
-				for (i = 0; i < 10; i++) {
-					spark[i] = Math.random(10);
-				}
-
 				var c = element[0];
 				var ctx = c.getContext("2d");
-				var ratioW = ( c.width * 1 ) / spark.length;
-				var ratioH = (c.height * .8) / Math.max.apply(Math, spark);
+				var data = c.getAttribute("data-sparkline");
+				var spark = data.split(',');
+				var min = Math.min.apply(Math, spark);
+				var max = Math.max.apply(Math, spark);
+				for (a in spark) {
+					spark[a] = parseInt(spark[a], 10);
+					spark[a] += Math.abs(0-min);
+				}
+				var scale = max - min;
 				var margin = 10;
-				
+				var ratioW = ( ( c.width - margin*2 ) * 1 ) / spark.length;
+				var ratioH = ( ( c.height - margin*2 ) * .8 ) / scale;
+
 				var x = 0;
 				var y = 0;
 				var grad = ctx.createLinearGradient(0, 0, c.width, c.height);
